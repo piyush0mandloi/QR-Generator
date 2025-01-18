@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <form action="/generate_qr" method="GET" id="qr-form">
+            <input type="text" id="data" name="data" placeholder="Enter text or URL" required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+        
+        <div id="qr-code-container" class="qr-code-container">
+            <!-- The QR code will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('qr-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const data = document.getElementById('data').value;
+            const encodedData = encodeURIComponent(data); // Encode the URL here
+            const qrCodeContainer = document.getElementById('qr-code-container');
+            qrCodeContainer.innerHTML = `<img src="/generate_qr/${encodedData}" alt="QR Code">`;
+        });
+    </script>
+    
+</body>
+</html>
